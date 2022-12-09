@@ -1,0 +1,1 @@
+docker run -ti -p 8000:8000 -v "%~dp0:/var/task" -v "%systemdrive%%homepath%\.aws:/root/.aws" --rm empirica-docker-image

@@ -82,6 +82,9 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
+zappa_settings.json
+zappa_settings1.json
+env
 .env
 .venv
 env/
@@ -89,7 +92,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+ve/
 # Spyder project settings
 .spyderproject
 .spyproject
