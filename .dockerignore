@@ -1,0 +1,17 @@
+# flyctl launch added from .gitignore
+**/.env
+**/credentials
+**/db.sqlite3
+# **/ve
+/db.sqlite3
+db.sqlite3
+
+# ve/
+# flyctl launch added from ve/.gitignore
+# created by virtualenv automatically
+# ve/**/*
+.env
+/.env
+**/__pycache
+**/api/__pycache__
+fly.toml

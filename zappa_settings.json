@@ -1,0 +1,27 @@
+{
+    "dev": {
+        "aws_region": "sa-east-1",
+        "django_settings": "core.settings",
+        "profile_name": "zappa",
+        "project_name": "task",
+        "runtime": "python3.8",
+        "s3_bucket": "zappa-971hba1vj",
+        "events": [
+            {
+              "function": "core.events.lambda_handler",
+              "event_source": {
+                "arn": "arn:aws:s3:::zappa-971hba1vj",
+                "batch_size": 10,
+                "enabled": true,
+                "events": ["s3:ObjectCreated:*","s3:ObjectAcl:Put"],
+                "key_filters": [{ 
+                    "type": "suffix",
+                    "value": ".csv"
+                  }]
+              }
+            }
+          ]
+
+
+    }
+}
