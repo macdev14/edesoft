@@ -70,12 +70,9 @@ Pode executar através de duas maneiras
 
 ## Variaveis de Ambiente
 
-- Configurar chaves AWS
+- Configurar Banco de Dados, AWS e chave secreta
 ```bash
- aws configure
-```
-- Configurar Banco de Dados e AWS
-```bash
+echo -e '''SECRET_KEY={sua_chave_secreta}''' >> .env
 echo -e "\nDATABASE_URL={sua_uri_do_bancodedados}" >> .env
 echo -e "\nAWS_ACCESS_KEY_ID={sua_aws_access_key}" >> .env
 echo -e "\nAWS_SECRET_ACCESS_KEY_ID={sua_aws_secret_access_key}" >> .env
