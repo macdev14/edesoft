@@ -70,13 +70,14 @@ Pode executar através de duas maneiras
 
 ## Variaveis de Ambiente
 
-- Configurar Banco de Dados, AWS e chave secreta
+- Configurar Banco de Dados, AWS e chave secreta (remover '{ }')
 ```bash
 echo -e '''SECRET_KEY={sua_chave_secreta}''' >> .env
-echo -e "\nDATABASE_URL={sua_uri_do_bancodedados}" >> .env
-echo -e "\nAWS_ACCESS_KEY_ID={sua_aws_access_key}" >> .env
-echo -e "\nAWS_SECRET_ACCESS_KEY_ID={sua_aws_secret_access_key}" >> .env
-echo -e "\nAWS_STORAGE_BUCKET_NAME={nome_do_buckets3}" >> .env
+echo -e '''DATABASE_URL={sua_uri_do_bancodedados}''' >> .env
+echo -e '''AWS_ACCESS_KEY_ID={sua_aws_access_key}''' >> .env
+echo -e '''AWS_SECRET_ACCESS_KEY_ID={sua_aws_secret_access_key}''' >> .env
+echo -e '''AWS_STORAGE_BUCKET_NAME={nome_do_bucket_s3}''' >> .env
+echo -e '''AWS_S3_REGION_NAME={regiao_do_bucket}''' >> .env
 ```
 # Criar evento e associar  a código lambda
 - Iniciar o zappa
