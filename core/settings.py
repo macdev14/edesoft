@@ -33,7 +33,7 @@ AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY') or os.environ['AWS_SECRET_A
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME') or os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_URL =  env('AWS_URL')
 
-print(AWS_URL)
+
 
 
 
@@ -43,15 +43,14 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # load_dotenv(BASE_DIR / '.env')
 
-print("ENV")
-print("ENV",AWS_ACCESS_KEY_ID)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY') or os.environ['SECRET_KEY']
-print('SECRET KEY', SECRET_KEY)
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
