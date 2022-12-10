@@ -60,31 +60,38 @@ Pode executar através de duas maneiras
  pip install -r requirements.txt
 ```
 
-- Escrever no banco de dados
-```python
- python manage.py makemigrations
- python manage.py migrate
-```
 
 
 
 ## Variaveis de Ambiente
 
-- Configurar Banco de Dados, AWS e chave secreta (remover '{ }')
+- Configurar Banco de Dados, AWS e chave secreta 
 ```bash
-echo -e '''SECRET_KEY={sua_chave_secreta}''' >> .env
-echo -e '''DATABASE_URL={sua_uri_do_bancodedados}''' >> .env
-echo -e '''AWS_ACCESS_KEY_ID={sua_aws_access_key}''' >> .env
-echo -e '''AWS_SECRET_ACCESS_KEY_ID={sua_aws_secret_access_key}''' >> .env
-echo -e '''AWS_STORAGE_BUCKET_NAME={nome_do_bucket_s3}''' >> .env
-echo -e '''AWS_S3_REGION_NAME={regiao_do_bucket}''' >> .env
+echo -e '''SECRET_KEY=sua_chave_secreta''' >> .env
+echo -e '''DATABASE_URL=sua_uri_do_bancodedados''' >> .env
+echo -e '''AWS_ACCESS_KEY_ID=sua_aws_access_key''' >> .env
+echo -e '''AWS_SECRET_ACCESS_KEY_ID=sua_aws_secret_access_key''' >> .env
+echo -e '''AWS_STORAGE_BUCKET_NAME=nome_do_bucket_s3''' >> .env
+echo -e '''AWS_S3_REGION_NAME=regiao_do_bucket''' >> .env
 ```
+
+## Configurar banco de dados e coletar arquivos estáticos 
+```python
+ python manage.py makemigrations
+ python manage.py migrate
+ python manage.py createsuperuser
+ python manage.py collectstatic
+```
+
+
 # Criar evento e associar  a código lambda
 - Iniciar o zappa
 ```bash
 zappa init
 
 ```
+
+
 
 ## Configurar o Zappa e Adicionar Eventos - zappa_settings.json
 [Saiba Mais](https://github.com/zappa/Zappa#executing-in-response-to-aws-events)
