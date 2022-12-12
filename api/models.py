@@ -22,5 +22,8 @@ class CessaoFundo(models.Model):
     data_de_emissao = models.DateField()
     data_de_vencimento = models.DateField()
     preco_de_aquisicao = models.DecimalField(max_digits=10,decimal_places=2)
+
+    def __str__(self) -> str:
+        return self.originador
     
 
