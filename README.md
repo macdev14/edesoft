@@ -1,4 +1,4 @@
-## Requisitos
+## Requirements
 
 - [Docker](https://www.docker.com)
 
@@ -10,82 +10,82 @@
 
 - [PostgreSQL](https://www.postgresql.org)
 
-## Serviços utilizados:
+## Services used:
 
 - [ElephantSQL](https://www.elephantsql.com)
 - [AWS Lambda](https://aws.amazon.com/pt/lambda/)
 - [AWS S3 Bucket](https://aws.amazon.com/pt/s3/)
 
-## Instalação
+## Installation
 
-Inicie o docker, clone o repositório e entre na pasta
+Start docker, clone the repository and enter the folder
 
 ```bash
 git clone https://github.com/macdev14/edesoft.git master
-cd edesoft
+edesoft cd
 
 ```
-## Imagem Docker
+## Docker Image
 
-Monte a imagem através do comando
+Mount the image using the command
 ```bash
-docker build -t empirica-docker-image . 
+docker build -t empirica-docker-image .
 ```
-Pode executar através de duas maneiras
+Can run through two ways
 
-- Script para Windows
+- Script for Windows
 
 
 ```bash
- empiricashell.bat
+  empiricashell.bat
 ```
-- Script para Mac OS
+- Script for Mac OS
 ```bash
- source empiricashell.sh
+  source empiricashell.sh
 ```
-- Manualmente
+- Manually
 ```docker
- docker run -ti -p 8000:8000 -v "$(pwd):/var/task" -v ~/.aws/:/root/.aws  --rm empirica-docker-image
+  docker run -ti -p 8000:8000 -v "$(pwd):/var/task" -v ~/.aws/:/root/.aws --rm empirica-docker-image
 ```
 
-## Imagem em Execução
- - Criar e ativar o Ambiente Virtual
+## Running Image
+  - Create and activate the Virtual Environment
 ```bash
- virtualenv ve
- source ve/bin/activate
+  virtualenv see
+  source ve/bin/activate
 ```
 
-- Instalar pacotes python
+- Install python packages
 ```python
- pip install -r requirements.txt
+  pip install -r requirements.txt
 ```
 
 
 
 
-## Variaveis de Ambiente
+## Environment variables
 
-- Configurar Banco de Dados, AWS e chave secreta 
+- Configure Database, AWS and secret key
 ```bash
-echo -e '''SECRET_KEY=sua_chave_secreta''' >> .env
-echo -e '''DATABASE_URL=sua_uri_do_bancodedados''' >> .env
-echo -e '''AWS_ACCESS_KEY_ID=sua_aws_access_key''' >> .env
-echo -e '''AWS_SECRET_ACCESS_KEY_ID=sua_aws_secret_access_key''' >> .env
-echo -e '''AWS_STORAGE_BUCKET_NAME=nome_do_bucket_s3''' >> .env
-echo -e '''AWS_S3_REGION_NAME=regiao_do_bucket''' >> .env
+echo -e '''SECRET_KEY=your_secret_key''' >> .env
+echo -e '''DATABASE_URL=your_database_uri''' >> .env
+echo -e '''AWS_ACCESS_KEY_ID=your_aws_access_key''' >> .env
+echo -e '''AWS_SECRET_ACCESS_KEY_ID=your_aws_secret_access_key''' >> .env
+echo -e '''AWS_STORAGE_BUCKET_NAME=bucket_name_s3''' >> .env
+echo -e '''AWS_S3_REGION_NAME=bucket_region''' >> .env
 ```
 
-## Configurar banco de dados e coletar arquivos estáticos 
+## Configure database and collect static files
 ```python
- python manage.py makemigrations
- python manage.py migrate
- python manage.py createsuperuser
- python manage.py collectstatic
+  python manage.py makemigrations
+  python manage.py migrate
+  python manage.py createsuperuser
+  python manage.py collectstatic
 ```
 
 
-# Criar evento e associar  a código lambda
-- Iniciar o zappa
+# Create event and associate with lambda code
+- Start zappa
 ```bash
 zappa init
 
@@ -93,89 +93,89 @@ zappa init
 
 
 
-## Configurar o Zappa e Adicionar Eventos - zappa_settings.json
-[Saiba Mais](https://github.com/zappa/Zappa#executing-in-response-to-aws-events)
+## Configure Zappa and Add Events - zappa_settings.json
+[Learn More](https://github.com/zappa/Zappa#executing-in-response-to-aws-events)
 
-- Colocar sua função em 
-```json 
+- Put your role in
+```json
 events:[
-    { 
-     function: "sua_função"
-    }
+     {
+      function: "your_function"
+     }
 ]
 ```
-- Quando deve ser acionada em 
-```json 
+- When should it be activated in
+```json
 events:[
-{ 
-   event_source:
-   { 
-        "events": ["tipos_de_eventos_aws"], 
-   }
+{
+    event_source:
+    {
+         "events": ["aws_event_types"],
+    }
 }
 ]
 ```
 
-- Filtrar tipo de arquivo
+- Filter file type
 ```json
 "key_filters": [
-     { 
-           "type": "suffix",
-           "value": ".csv"
-     }
+      {
+            "type": "suffix",
+            "value": ".csv"
+      }
 ]
 ```
 
 ```json
 {
-    "dev": {
-        "aws_region": "sa-east-1",
-        "django_settings": "core.settings",
-        "profile_name": "zappa",
-        "project_name": "task",
-        "runtime": "python3.8",
-        "s3_bucket": "zappa-971hba1vj",
-        "events": [
-            {
-              "function": "core.events.lambda_handler",
-              "event_source": {
-                "arn": "arn:aws:s3:::zappa-971hba1vj",
-                "batch_size": 10,
-                "enabled": true,
-                "events": ["s3:ObjectCreated:*","s3:ObjectAcl:Put"],
-                "key_filters": [{ 
-                    "type": "suffix",
-                    "value": ".csv"
-                  }]
-              }
-            }
-          ]
+     "dev": {
+         "aws_region": "sa-east-1",
+         "django_settings": "core.settings",
+         "profile_name": "zappa",
+         "project_name": "task",
+         "runtime": "python3.8",
+         "s3_bucket": "zappa-971hba1vj",
+         "events": [
+             {
+               "function": "core.events.lambda_handler",
+               "event_source": {
+                 "arn": "arn:aws:s3:::zappa-971hba1vj",
+                 "batch_size": 10,
+                 "enabled": true,
+                 "events": ["s3:ObjectCreated:*","s3:ObjectAcl:Put"],
+                 "key_filters": [{
+                     "type": "suffix",
+                     "value": ".csv"
+                   }]
+               }
+             }
+           ]
 
 
-    }
+     }
 }
 
 ```
 
-## Criar evento e enviar para o lambda
+## Create event and send to lambda
 
 ```bash
-zappa deploy <nome_de_stage>
-#exemplo
+zappa deploy <stage_name>
+#example
 zappa deploy dev
 
 ```
 
-## Atualizar evento/código e enviar para o lambda
+## Update event/code and send to lambda
 
 ```bash
-zappa update <nome_de_stage>
-#exemplo
+zappa update <stage_name>
+#example
 zappa update dev
 ```
 
 
 
-## Licença
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
